@@ -223,8 +223,8 @@ const MapComponent: React.FC = () => {
     try {
       // Create mock distance properties matching the Random Forest model expectations
       const payload = {
-        "Arrival Time": arrivalTime,
-        "Day of the Week": new Date().toLocaleString('en-us', { weekday: 'long' }),
+        "hour_of_day": Number(arrivalTime.split(':')[0]),
+        "day_of_week": new Date().toLocaleString('en-us', { weekday: 'long' }),
         "Disease": disease,
         "Distance from AIIMS Bhubaneswar": 500,
         "Distance from IGKC Multispeciality hospital": 600,

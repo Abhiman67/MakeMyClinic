@@ -28,13 +28,13 @@ const PatientForm: React.FC = () => {
     const fetchWaitTime = async () => {
       try {
         const payload = {
-          "Arrival Time": new Date().toTimeString().split(' ')[0], // e.g. "14:30:00"
+          "Hospital": "AIIMS Bhubaneswar",
+          "Arrival Time": new Date().toTimeString().split(' ')[0],
           "Day of the Week": new Date().toLocaleString('en-us', { weekday: 'long' }),
-          "Disease": "Fever", // Mock default
-          "Distance from AIIMS Bhubaneswar": 500,
-          "Distance from IGKC Multispeciality hospital": 600,
-          "Distance from SUM Ultimate": 200,
-          "Distance from ApolloMedicare": 800
+          "Ward Visited": "General Ward",
+          "Number of patients under age 30": 8,
+          "Number of patients of age 31-50": 10,
+          "Number of patients of age 51 and above": 5
         };
 
         const ML_API_URL = import.meta.env.VITE_ML_API_URL || 'http://localhost:5000';
