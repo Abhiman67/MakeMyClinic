@@ -96,7 +96,8 @@ export const createAppointment = async (req: Request, res: Response) => {
   const { name, age, gender, appointType, patientId, doctorId, hospitalId, appointmentDate } = req.body;
 
   try {
-    // Create a new ticket entry for the patient
+    const appointmentDateIso = new Date(appointmentDate).toISOString();
+
     const ticket = await prisma.ticket.create({
       data: {
         name,
@@ -107,20 +108,36 @@ export const createAppointment = async (req: Request, res: Response) => {
         doctorId,
         hospitalId,
         approved: true,
-        appointmentDate: new Date(appointmentDate).toISOString()
+        appointmentDate: appointmentDateIso
       },
     });
-    
-    const queue = await prisma.queue.create({
+
+    const lastQueueEntry = await prisma.queue.findFirst({
+      where: {
+        hospitalId,
+        doctorId,
+        appointmentDate: appointmentDateIso,
+      },
+      orderBy: {
+        position: "desc"
+      },
+      select: {
+        position: true
+      }
+    });
+
+    const nextPosition = (lastQueueEntry?.position ?? 0) + 1;
+
+    await prisma.queue.create({
       data: {
         hospitalId,
         doctorId,
-        position: 1,
-        appointmentDate: new Date(appointmentDate).toISOString(), // Use the provided date
+        position: nextPosition,
+        appointmentDate: appointmentDateIso,
         pending: false,
         ticketId: ticket.id,
       },
-    })
+    });
 
     // Respond with success message, ticket details, and queue position (if OPD)
     res.json({

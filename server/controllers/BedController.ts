@@ -9,37 +9,47 @@ import { Request, Response } from "express";
  */
 export const approveBed = async (req: Request, res: Response) => {
   const ticketId = Number(req.params.ticketId);
-  const { hospitalId, appointmentDate } = req.body;
+  const { hospitalId } = req.body;
 
   try {
-    // Use a Prisma transaction to ensure both updates are performed atomically
-      const ticket = await prisma.ticket.update({
-        where: {
-          id: ticketId,
-        },
-        data: { approved: true },
+    const ticket = await prisma.ticket.update({
+      where: {
+        id: ticketId,
+      },
+      data: { approved: true },
+    });
+
+    if (ticket.appointType == "OPD") {
+      const existingQueueEntry = await prisma.queue.findFirst({
+        where: { ticketId: ticket.id },
+        select: { id: true }
       });
 
-      if (ticket.appointType == "OPD") {
-        // const queueCount = await prisma.queue.count({
-        //   where: {
-        //     hospitalId,
-        //     doctorId: ticket.doctorId!,
-        //     appointmentDate: new Date().toISOString(),
-        //   },
-        // });
+      if (!existingQueueEntry) {
+        const lastQueueEntry = await prisma.queue.findFirst({
+          where: {
+            hospitalId,
+            doctorId: ticket.doctorId!,
+            appointmentDate: ticket.appointmentDate,
+          },
+          orderBy: { position: "desc" },
+          select: { position: true },
+        });
 
-        const queue = await prisma.queue.create({
+        const nextPosition = (lastQueueEntry?.position ?? 0) + 1;
+
+        await prisma.queue.create({
           data: {
             hospitalId,
             doctorId: ticket.doctorId!,
-            position: 1,
-            appointmentDate: ticket.appointmentDate, // Use the provided date
+            position: nextPosition,
+            appointmentDate: ticket.appointmentDate,
             pending: false,
             ticketId: ticket.id,
           },
         });
       }
+    }
 
     res.json({ message: "Ticket approved and bed assigned successfully" });
   } catch (error) {

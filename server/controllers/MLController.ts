@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { hospitalRecommendRequest, waitTimeRequest } from "../types/hospitalRecTypes";
 
+const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://127.0.0.1:5000";
+
 /**
  * Retrieves hospital recommendations based on user preferences.
  *
@@ -12,12 +14,12 @@ export const getHospitalRecommendations = async (req: Request, res: Response) =>
 
   // Validate the request body
   if (!hospitalRecommendRequest.safeParse(hospitalList).success) {
-    return res.status(403).json({ message: "Invalid request" });
+    return res.status(400).json({ message: "Invalid request" });
   }
 
   try {
     // Send a POST request to the recommendation service
-    const recommendation = await fetch("127.0.0.1:5000/recommend", {
+    const recommendation = await fetch(`${ML_SERVICE_URL}/recommend`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(hospitalList), // Ensure JSON string is sent
@@ -50,12 +52,12 @@ export const getHospitalWaitTimes = async (req: Request, res: Response) => {
 
   // Validate the request body
   if (!waitTimeRequest.safeParse(waittimeBody).success) {
-    return res.status(403).json({ message: "Invalid request" });
+    return res.status(400).json({ message: "Invalid request" });
   }
 
   try {
     // Send a POST request to the waiting time service
-    const recommendation = await fetch("127.0.0.1:5000/waiting_time", {
+    const recommendation = await fetch(`${ML_SERVICE_URL}/waiting_time`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(waittimeBody),

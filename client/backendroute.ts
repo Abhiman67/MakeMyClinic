@@ -1,6 +1,1 @@
-// Define backend route
-const PORT = 3000;
-export const route = `http://localhost:${PORT}`;
-
-// For debugging
-console.log('Backend API URL:', route);
+export const route = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';

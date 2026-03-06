@@ -6,7 +6,7 @@ import { getHospitalRecommendations, getHospitalWaitTimes } from "../controllers
 export const mlRouter = Router();
 
 // Get hospital recommendations
-mlRouter.get("/hospital", authenticate, authenticatePatient, getHospitalRecommendations);
+mlRouter.post("/hospital", authenticate, authenticatePatient, getHospitalRecommendations);
 
 // Get estimated waiting times for hospitals
-mlRouter.get("/waittime", getHospitalWaitTimes);
+mlRouter.post("/waittime", authenticate, authenticatePatient, getHospitalWaitTimes);

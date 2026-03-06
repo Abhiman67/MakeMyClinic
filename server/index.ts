@@ -21,7 +21,7 @@ import { initializeSocket } from './socket';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 const END_POINT = process.env.END_POINT || 'http://localhost:5173';
 
 // Middleware
