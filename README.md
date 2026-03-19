@@ -33,6 +33,7 @@
 - [AI/ML Components](#-aiml-components)
 - [Deployment](#-deployment)
 - [Screenshots](#-screenshots)
+- [Resume / Portfolio Description](#-resume--portfolio-description)
 - [License](#-license)
 
 ---
@@ -326,6 +327,56 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
+## 📝 Resume / Portfolio Description
+
+Use the snippets below to add **Make My Clinic** to your resume, LinkedIn, or portfolio.
+
+---
+
+### 🔹 One-Line Summary *(for skills sections or quick mentions)*
+
+> Built a full-stack, AI-powered hospital management system with real-time scheduling, ML-based triage, and role-based dashboards using React, Node.js, PostgreSQL, and Python/Flask.
+
+---
+
+### 🔹 Short Project Description *(2–3 sentences, great for a resume project entry)*
+
+> **Make My Clinic** — AI-Powered Hospital Management System *(Full-Stack · TypeScript · Python · React)*
+>
+> Designed and developed a production-grade, multi-role hospital management platform featuring OS-inspired patient queue scheduling (Priority & SJF algorithms), a Random Forest ML model for intelligent hospital routing and wait-time prediction, and a Gemini AI medical chatbot. Built with React 18, TypeScript, Node.js/Express, PostgreSQL (Prisma ORM), Python/Flask microservice, and real-time Socket.IO updates across five role-based dashboards (Admin, Doctor, Patient, Receptionist, Inventory Manager).
+
+---
+
+### 🔹 Detailed Resume Bullet Points *(pick the most relevant ones)*
+
+- Architected a **microservices-based** full-stack application with a React 18 + TypeScript frontend, a Node.js/Express REST API backend, and a decoupled Python/Flask AI/ML service, all communicating over HTTP and WebSockets.
+- Implemented **role-based access control (RBAC)** with JWT authentication and five distinct user roles (Admin, Doctor, Patient, Receptionist, Inventory Manager), each with tailored dashboards and protected routes.
+- Integrated **Machine Learning** (Scikit-learn Random Forest Classifier & Regressor) for smart hospital recommendation based on disease type, time-of-day, and geolocation, and for real-time patient wait-time prediction.
+- Built an **OS-inspired queue scheduling engine** using Priority Scheduling and Shortest Job First (SJF) algorithms to optimize patient triage, combined with historical AI pattern matching for a dual-engine wait-time estimate.
+- Implemented **real-time features** using Socket.IO for live queue updates, bed-availability broadcasting, and appointment notifications across all connected dashboards.
+- Developed an **interactive hospital triage map** with Mapbox GL JS that plots AI-recommended hospitals, calculates driving routes, and displays live distance/time estimates.
+- Managed a **relational PostgreSQL database** using Prisma ORM with schema-driven migrations, modeling complex relationships across 12+ entities (hospitals, doctors, patients, wards, queues, tickets, inventory).
+- Integrated **Google Gemini Pro API** as a context-aware medical assistant chatbot, globally accessible via a floating action button across all authenticated pages.
+- Built a **PDF prescription generator** using jsPDF and html2canvas, enabling doctors to export formatted prescriptions directly from the dashboard.
+- Engineered **interactive analytics dashboards** with Chart.js and Recharts for real-time hospital statistics, OPD metrics, and inventory tracking, consumed by Admin and Inventory Manager roles.
+- Designed a **responsive, mobile-first UI** with Tailwind CSS and Framer Motion animations, achieving a consistent experience across all device sizes.
+- Configured a **monorepo workspace** with separate `client/`, `server/`, and `AIML/` directories and deployment pipelines to Vercel (frontend), Render (backend/ML service), and a managed PostgreSQL cloud database.
+
+---
+
+### 🔹 LinkedIn / Portfolio Project Card Format
+
+**Project Name:** Make My Clinic — Intelligent Hospital Management System
+
+**Tech Stack:** React 18 · TypeScript · Node.js · Express · PostgreSQL · Prisma ORM · Python · Flask · Scikit-learn · Socket.IO · Mapbox GL JS · Google Gemini AI · JWT · Tailwind CSS · Framer Motion
+
+**Summary:**
+Full-stack hospital management platform featuring 5 role-based dashboards, OS-level queue scheduling (Priority + SJF), ML-driven hospital routing and wait-time prediction, real-time updates via Socket.IO, an AI medical chatbot (Gemini), interactive Mapbox triage maps, and PDF prescription generation. Deployed on Vercel + Render with a decoupled Flask ML microservice.
+
+**GitHub:** https://github.com/Abhiman67/MakeMyClinic
+
+---
+
 <p align="center">
-  Architectured by Abhiman67
+  Architected by Abhiman67
 </p>
